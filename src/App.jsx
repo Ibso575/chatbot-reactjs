@@ -1,5 +1,6 @@
 import React from 'react';
 import Chatboticon from './components/chatboticon';
+import Chatform from './components/chatform';
 
 const App = () => {
     return (
@@ -29,10 +30,7 @@ const App = () => {
                </div>
                {/* chat footer */}
                <div className="chat-footer">
-                <form action="#" className="chat-form">
-                    <input type="text" placeholder='message...' className="message-input" required/>
-                    <button className='material-symbols-rounded'>keyboard_arrow_up</button>
-                </form>
+                <Chatform/>
                </div>
             </div>
         </div>
