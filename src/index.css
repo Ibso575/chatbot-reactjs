@@ -67,3 +67,55 @@ background: #6D4FC2;
     margin-right: -10px;
     background: #593bab;
 }
+
+.chat-header button :hover{
+    background: #593bab;
+}
+
+.chat-body {
+    padding: 25px 22px;
+    height: 460px;
+    overflow-y: auto;
+}
+
+.chat-body .message{
+    display: flex;
+    gap: 11px;
+    align-items: center;
+}
+
+.chat-body .bot-message{
+    height: 35px;
+    width: 35px;
+    padding: 6px;
+    flex-shrink: 0;
+    fill: #fff;
+    margin-bottom: 2px;
+    background: #6D4FC2;
+    border-radius: 50%;
+    align-self: flex-end;
+}
+
+.chat-body .message .message-text {
+    padding: 12px 16px;
+    max-width: 75%;
+}
+
+.chat-body .bot-message .message-text {
+    background: #F6F2FF;
+    border-radius: 13px 13px 13px 13px;
+}
+
+.chat-body .user-message {
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.chat-body .user-message .message-text {
+    background: #6D4FC2;
+    color: #fff;
+    border-radius: 13px 13px 3px 13px;
+}
+
+
+
