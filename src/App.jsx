@@ -6,6 +6,11 @@ import ChatMessage from "./components/ChatMessage";
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
 
+  const generateborresponse = (history) =>{
+console.log(history);
+
+  }
+
   return (
     <div className="container">
       <div className="chatbot-popup">
@@ -34,7 +39,7 @@ const App = () => {
         </div>
         {/* chat footer */}
         <div className="chat-footer">
-          <Chatform setchathistory={setchathistory} />
+          <Chatform chathistory={chathistory} setchathistory={setchathistory} generateborresponse={generateborresponse} />
         </div>
       </div>
     </div>
