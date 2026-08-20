@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Chatboticon from './components/chatboticon';
 import Chatform from './components/chatform';
 
 const App = () => {
+
+    const [chathistory,setchathistory] = useState([]);
+
     return (
         <div className='container'>
             <div className="chatbot-popup">
@@ -30,7 +33,7 @@ const App = () => {
                </div>
                {/* chat footer */}
                <div className="chat-footer">
-                <Chatform/>
+                <Chatform setchathistory={setchathistory}/>
                </div>
             </div>
         </div>
