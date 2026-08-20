@@ -1,12 +1,14 @@
 import React from "react";
+import Chatboticon from "./chatboticon";
 
-const ChatMessage = () => {
+const ChatMessage = ({chat}) => {
   return (
-    <div className="message user-message">
+    <div className={`message ${chat.role === "model" ? 'bot' : 'user'}-message`}>
+      {chat.role === "model" && <Chatboticon/>}
       <p className="message-text">
-        Lorem ipsum dolor sit amet consectetur adipisicing.
+        {chat.text}
       </p>
-    </div>
+    </div> 
   );
 };
 
