@@ -6,13 +6,20 @@ import ChatMessage from "./components/ChatMessage";
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
 
-  const generateborresponse = (history) =>{
+  const generateborresponse = async (history) =>{
+    // format chat history
     history = history.map(({role,text}) => ({role,parts:[{text}]}));
 
     const requestoptions = {
       method: "POST",
       headers: { "Content-Type" : "application/json" },
       body: JSON.stringify({ contents: history})
+    }
+
+    try{
+     const response = await fetch(import.meta.env.VITE_API_URL,);
+    }catch(error) {
+
     }
 
   };
