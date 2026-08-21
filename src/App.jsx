@@ -6,7 +6,16 @@ import ChatMessage from "./components/ChatMessage";
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
 
-  const generateborresponse = async (history) => {
+  const generatebotresponse = async (history) => {
+
+    // help function to update chat history
+    const updatehistory = (text) => {
+      setchathistory((prev) => [
+        ...prev.filter((msg) => msg.text !== "Thinking..."),
+        { role: "model", text },
+      ]);
+    };
+
     // format chat history
     history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
 
@@ -24,7 +33,11 @@ const App = () => {
       const data = await response.json();
       if (!response.ok)
         throw new Error(data.error.message || "Something went wrong");
-      console.log(data);
+
+      const apiresponsetext = data.candidates[0].content.parts[0].text
+        .replace(/\*\*(.*?)\*\*/g, "$1")
+        .trim();
+      updatehistory(apiresponsetext);
     } catch (error) {
       console.log(error);
     }
@@ -61,7 +74,7 @@ const App = () => {
           <Chatform
             chathistory={chathistory}
             setchathistory={setchathistory}
-            generateborresponse={generateborresponse}
+            generateborresponse={generatebotresponse}
           />
         </div>
       </div>
