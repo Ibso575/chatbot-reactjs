@@ -7,9 +7,15 @@ const App = () => {
   const [chathistory, setchathistory] = useState([]);
 
   const generateborresponse = (history) =>{
-console.log(history);
+    history = history.map(({role,text}) => ({role,parts:[{text}]}));
 
-  }
+    const requestoptions = {
+      method: "POST",
+      headers: { "Content-Type" : "application/json" },
+      body: JSON.stringify({ contents: history})
+    }
+
+  };
 
   return (
     <div className="container">
