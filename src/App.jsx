@@ -6,22 +6,28 @@ import ChatMessage from "./components/ChatMessage";
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
 
-  const generateborresponse = async (history) =>{
+  const generateborresponse = async (history) => {
     // format chat history
-    history = history.map(({role,text}) => ({role,parts:[{text}]}));
+    history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
 
     const requestoptions = {
       method: "POST",
-      headers: { "Content-Type" : "application/json" },
-      body: JSON.stringify({ contents: history})
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ contents: history }),
+    };
+
+    try {
+      const response = await fetch(
+        import.meta.env.VITE_API_URL,
+        requestoptions,
+      );
+      const data = await response.json();
+      if (!response.ok)
+        throw new Error(data.error.message || "Something went wrong");
+      console.log(data);
+    } catch (error) {
+      console.log(error);
     }
-
-    try{
-     const response = await fetch(import.meta.env.VITE_API_URL,);
-    }catch(error) {
-
-    }
-
   };
 
   return (
@@ -52,7 +58,11 @@ const App = () => {
         </div>
         {/* chat footer */}
         <div className="chat-footer">
-          <Chatform chathistory={chathistory} setchathistory={setchathistory} generateborresponse={generateborresponse} />
+          <Chatform
+            chathistory={chathistory}
+            setchathistory={setchathistory}
+            generateborresponse={generateborresponse}
+          />
         </div>
       </div>
     </div>
