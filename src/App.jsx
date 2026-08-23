@@ -10,10 +10,10 @@ const App = () => {
 
   const generatebotresponse = async (history) => {
     // help function to update chat history
-    const updatehistory = (text) => {
+    const updatehistory = (text,iserror = false) => {
       setchathistory((prev) => [
         ...prev.filter((msg) => msg.text !== "Thinking..."),
-        { role: "model", text },
+        { role: "model", text,iserror },
       ]);
     };
 
@@ -40,7 +40,7 @@ const App = () => {
         .trim();
       updatehistory(apiresponsetext);
     } catch (error) {
-      console.log(error);
+      updatehistory(error.message, true);
     }
   };
   useEffect(() => {
@@ -67,7 +67,7 @@ const App = () => {
             <Chatboticon />
             <h2 className="logo-text">Chatbot</h2>
           </div>
-          <button onClick={() => setshowchatbot((prev) => !prev)} className="material-symbols-rounded">
+          <button onClick={() => setshowchatbot((prev) => !prev)}  className="material-symbols-rounded">
             keyboard_arrow_down
           </button>
         </div>

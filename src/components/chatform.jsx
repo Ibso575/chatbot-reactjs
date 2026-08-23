@@ -17,7 +17,7 @@ const handleformsubmit = (e) => {
     setTimeout(() => setchathistory(history => [...history,{role:"model",text:"Thinking..."}]),600);
 
     // call the function to generate the bot's response
-    generateborresponse([...chathistory,{role:"user",text:userMessage}]);
+    generateborresponse([...chathistory,{role:"user",text:`${userMessage}`}]);
 }
 
   return (

@@ -120,7 +120,7 @@ body {
 
 .chat-body {
   padding: 25px 22px;
-  height: 460px;
+  height: 340px;
   overflow-y: auto;
   margin-bottom: 82px;
   display: flex;
@@ -133,7 +133,10 @@ body {
 .chat-body .message {
   display: flex;
   gap: 11px;
-  align-items: flex-start; /* center o'rniga flex-start */
+  align-items: center; 
+}
+.chat-body .message.error .message-text {
+  color: #ff0000;
 }
 
 /* Bot ikonkasiga berilgan noto'g'ri stillar to'g'rilandi */
@@ -221,3 +224,7 @@ body {
 .chat-form button:hover {
   background: #593bab;
 }
+
+
+
+

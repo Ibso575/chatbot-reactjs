@@ -3,7 +3,7 @@ import Chatboticon from "./chatboticon";
 
 const ChatMessage = ({chat}) => {
   return (
-    <div className={`message ${chat.role === "model" ? 'bot' : 'user'}-message`}>
+    <div className={`message ${chat.role === "model" ? 'bot' : 'user'}-message ${chat.iserror ? "error" : ""} `}>
       {chat.role === "model" && <Chatboticon/>}
       <p className="message-text">
         {chat.text}
