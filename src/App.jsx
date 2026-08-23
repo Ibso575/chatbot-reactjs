@@ -50,6 +50,10 @@ useEffect(()=>{
 
   return (
     <div className="container">
+      <button id="chatbot-toggler">
+        <span className="material-symbols-rounded">mode_comment</span>
+        <span className="material-symbols-rounded">close</span>
+      </button>
       <div className="chatbot-popup">
         {/* chatbot header */}
         <div className="chat-header">
