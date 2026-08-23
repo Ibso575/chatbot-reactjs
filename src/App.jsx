@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Chatboticon from "./components/chatboticon";
 import Chatform from "./components/chatform";
 import ChatMessage from "./components/ChatMessage";
@@ -6,24 +6,42 @@ import ChatMessage from "./components/ChatMessage";
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
   const [showchatbot, setshowchatbot] = useState(false);
-  const chatbodyref = useRef();
+  const [isGenerating, setIsGenerating] = useState(false);
+  const chatbodyref = useRef(null);
+  const requestInProgress = useRef(false);
 
   const generatebotresponse = async (history) => {
+    if (requestInProgress.current) return;
+    requestInProgress.current = true;
+    setIsGenerating(true);
+
     // help function to update chat history
-    const updatehistory = (text,iserror = false) => {
+    const updatehistory = (text, iserror = false) => {
       setchathistory((prev) => [
         ...prev.filter((msg) => msg.text !== "Thinking..."),
-        { role: "model", text,iserror },
+        { role: "model", text, iserror },
       ]);
     };
 
-    // format chat history
-    history = history.map(({ role, text }) => ({ role, parts: [{ text }] }));
+    // Faqat oxirgi xabarlarni yuborish so'rov hajmini kamaytiradi.
+    const recentHistory = history
+      .filter(({ text }) => text !== "Thinking...")
+      .slice(-8)
+      .map(({ role, text }) => ({
+        role: role === "assistant" ? "model" : role,
+        parts: [{ text }],
+      }));
 
     const requestoptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ contents: history }),
+      body: JSON.stringify({
+        contents: recentHistory,
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 256,
+        },
+      }),
     };
 
     try {
@@ -32,22 +50,26 @@ const App = () => {
         requestoptions,
       );
       const data = await response.json();
-      if (!response.ok)
-        throw new Error(data.error.message || "Something went wrong");
+      if (!response.ok) {
+        throw new Error(data?.error?.message || "Something went wrong");
+      }
 
-      const apiresponsetext = data.candidates[0].content.parts[0].text
+      const apiresponsetext = data?.candidates?.[0]?.content?.parts?.[0]?.text
         .replace(/\*\*(.*?)\*\*/g, "$1")
         .trim();
       updatehistory(apiresponsetext);
     } catch (error) {
-      updatehistory(error.message, true);
+      updatehistory(error.message || "Server bilan bog'lanishda xatolik.", true);
+    } finally {
+      requestInProgress.current = false;
+      setIsGenerating(false);
     }
   };
   useEffect(() => {
     // auto scroll in chat
-    chatbodyref.current.scrollTo({
+    chatbodyref.current?.scrollTo({
       top: chatbodyref.current.scrollHeight,
-      behavior: "smooth",
+      behavior: "auto",
     });
   }, [chathistory]);
 
@@ -90,6 +112,7 @@ const App = () => {
             chathistory={chathistory}
             setchathistory={setchathistory}
             generateborresponse={generatebotresponse}
+            isGenerating={isGenerating}
           />
         </div>
       </div>

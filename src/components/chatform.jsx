@@ -1,23 +1,35 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 
-const Chatform = ({ chathistory,setchathistory,generateborresponse}) => {
+const Chatform = ({
+  chathistory,
+  setchathistory,
+  generateborresponse,
+  isGenerating,
+}) => {
 
 const inputRef = useRef();
+const submittingRef = useRef(false);
 
 const handleformsubmit = (e) => {
     e.preventDefault();
+    if (submittingRef.current || isGenerating) return;
+
     const userMessage = inputRef.current.value.trim();
     if(!userMessage) return;
+    submittingRef.current = true;
     inputRef.current.value = "";
  
     // update chat history with user's message
-    setchathistory(history => [...history,{role:"user",text:userMessage}]);
+    const nextHistory = [...chathistory, { role: "user", text: userMessage }];
+    setchathistory(nextHistory);
 
-// add a thingking ... bot's response
-    setTimeout(() => setchathistory(history => [...history,{role:"model",text:"Thinking..."}]),600);
+    // Loading xabarini kechiktirmasdan ko'rsatish.
+    setchathistory(history => [...history, { role: "model", text: "Thinking..." }]);
 
     // call the function to generate the bot's response
-    generateborresponse([...chathistory,{role:"user",text:`${userMessage}`}]);
+    generateborresponse(nextHistory).finally(() => {
+      submittingRef.current = false;
+    });
 }
 
   return (
@@ -29,7 +41,13 @@ const handleformsubmit = (e) => {
         className="message-input"
         required
       />
-      <button className="material-symbols-rounded">keyboard_arrow_up</button>
+      <button
+        type="submit"
+        className="material-symbols-rounded"
+        disabled={isGenerating}
+      >
+        keyboard_arrow_up
+      </button>
     </form>
   );
 };
