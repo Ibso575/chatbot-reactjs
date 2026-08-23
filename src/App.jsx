@@ -5,10 +5,10 @@ import ChatMessage from "./components/ChatMessage";
 
 const App = () => {
   const [chathistory, setchathistory] = useState([]);
+  const [showchatbot, setshowchatbot] = useState(false);
   const chatbodyref = useRef();
 
   const generatebotresponse = async (history) => {
-
     // help function to update chat history
     const updatehistory = (text) => {
       setchathistory((prev) => [
@@ -43,14 +43,20 @@ const App = () => {
       console.log(error);
     }
   };
-useEffect(()=>{
-  // auto scroll in chat
-  chatbodyref.current.scrollTo({top:chatbodyref.current.scrollHeight, behavior:"smooth"});
-},[chathistory]);
+  useEffect(() => {
+    // auto scroll in chat
+    chatbodyref.current.scrollTo({
+      top: chatbodyref.current.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [chathistory]);
 
   return (
-    <div className="container">
-      <button id="chatbot-toggler">
+    <div className={`container ${showchatbot ? "show-chatbot" : ""}`}>
+      <button
+        onClick={() => setshowchatbot((prev) => !prev)}
+        id="chatbot-toggler"
+      >
         <span className="material-symbols-rounded">mode_comment</span>
         <span className="material-symbols-rounded">close</span>
       </button>
@@ -61,7 +67,7 @@ useEffect(()=>{
             <Chatboticon />
             <h2 className="logo-text">Chatbot</h2>
           </div>
-          <button className="material-symbols-rounded">
+          <button onClick={() => setshowchatbot((prev) => !prev)} className="material-symbols-rounded">
             keyboard_arrow_down
           </button>
         </div>
