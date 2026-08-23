@@ -120,7 +120,7 @@ body {
 
 .chat-body {
   padding: 25px 22px;
-  height: 340px;
+  height: 400px;
   overflow-y: auto;
   margin-bottom: 82px;
   display: flex;
