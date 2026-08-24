@@ -1,16 +1,52 @@
-# React + Vite
+# 🤖 AI Chatbot Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Sun'iy intellekt texnologiyalariga asoslangan, tezkor va qulay muloqot interfeysini taqdim etuvchi AI Chatbot ilovasi.
 
-Currently, two official plugins are available:
+[![React](https://img.shields.io/badge/React-18.x-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🔗 Jonli Demo (Live Preview)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Sayt manzili:** [https://chatbot-reactjs-tau.vercel.app/]
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Asosiy Imkoniyatlar (Features)
+
+- 💬 **Real-time AI Muloqot:** AI bilan tezkor va uzluksiz savol-javob rejimi.
+- ⚡ **Tezkor Ishlash:** Vite yordamida minimum yuklanish vaqti hamda yuqori samaradorlik.
+- 📱 **Responsive Dizayn:** Mobil, planshet va kompyuter ekranlariga moslashgan qulay interfeys.
+
+---
+
+## 🛠 Texnologiyalar Steki (Tech Stack)
+
+- **Frontend:** React.js, JavaScript (ES6+)
+- **Build Tool:** Vite
+- **Styling:** CSS3 / Tailwind CSS
+- **API Integration:** Gemini API
+- **Deploy:** Vercel
+
+---
+
+## 🚀 Loyihani Kompyuterda Ishga Tushirish
+
+Ushbu loyihani o'zingizda ishga tushirish uchun quyidagi buyruqlarni ketma-ket bajaring:
+
+### 1. Repozitoriyani klonlash
+
+```bash
+git clone [https://github.com/Ibso575/chatbot-reactjs.git](https://github.com/Ibso575/chatbot-reactjs.git)
+
+### 2. Loyiha papkasiga o'tish
+cd chatbot-reactjs
+
+### 3. Kutubxonalarni o'rnatish
+npm install
+
+### 3. Loyihani lokal serverda ishga tushirish
+npm run dev
+
