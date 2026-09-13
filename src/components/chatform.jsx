@@ -19,14 +19,9 @@ const handleformsubmit = (e) => {
     submittingRef.current = true;
     inputRef.current.value = "";
  
-    // update chat history with user's message
     const nextHistory = [...chathistory, { role: "user", text: userMessage }];
     setchathistory(nextHistory);
 
-    // Loading xabarini kechiktirmasdan ko'rsatish.
-    setchathistory(history => [...history, { role: "model", text: "Thinking..." }]);
-
-    // call the function to generate the bot's response
     generateborresponse(nextHistory).finally(() => {
       submittingRef.current = false;
     });

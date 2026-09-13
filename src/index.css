@@ -22,13 +22,16 @@ body {
   right: 35px;
   transform: scale(0.2);
   transform-origin: bottom right;
-  width: 420px;
+  width: min(420px, calc(100vw - 70px));
+  height: min(680px, calc(100vh - 100px));
+  max-height: calc(100vh - 100px);
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   background: #fff;
-  width: 420px;
-  overflow: hidden;
   border-radius: 15px;
-  transition:all 0.1s ease ;
+  transition: all 0.1s ease;
   box-shadow: 0 0 128px 0 rgba(0, 0, 0, 0.1), 0 32px 64px -48px rgba(0, 0, 0, 0.5);
 }
 
@@ -119,10 +122,10 @@ body {
 }
 
 .chat-body {
+  flex: 1 1 auto;
+  min-height: 0;
   padding: 25px 22px;
-  height: 400px;
   overflow-y: auto;
-  margin-bottom: 82px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -136,7 +139,7 @@ body {
   align-items: center; 
 }
 .chat-body .message.error .message-text {
-  color: #ff0000;
+  color: #1f1f1f;
 }
 
 /* Bot ikonkasiga berilgan noto'g'ri stillar to'g'rilandi */
@@ -175,11 +178,12 @@ body {
 }
 
 .chat-footer {
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  bottom: auto;
   width: 100%;
   background: #fff;
   padding: 15px;
+  flex-shrink: 0;
 }
 
 .chat-footer .chat-form {
